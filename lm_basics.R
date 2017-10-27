@@ -20,7 +20,7 @@ plot(size,price, col=2, pch=16,bg="yellow",bty="l",
      xlab = "size in feet", ylab = "price ($) in 1000", 
      main = "simple linear model")
 
-#make a linear regression model of the df
+#make a linear regression model of the dataframe
 lm_prices<-lm(price~size, data = regtrain)
 summary(lm_prices)
 
@@ -29,7 +29,7 @@ abline(coef(lm_prices), lwd=1)
 lines(size[order(size)], price[order(price)],col="blue")
 
 #Predict the price for 3000 feet
-size_1200<-data.frame(size=3000)
-predict(lm_prices,size_1200)
+size_3000<-data.frame(size=3000)
+predict(lm_prices,size_3000)
 
 #*******************************************************************
