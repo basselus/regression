@@ -49,4 +49,24 @@ library(psych)
 pairs.panels(Boston[,1:14])
 
 #medv (median house value) is the target variable.
-#medv is correlated with predictor variables lstat and rm
+#medv is correlated with predictor variables lstat, rm and age
+
+#******************************************
+#STEP 3 : BUILD THE MODEL
+#******************************************
+
+#Multiple linear regression with all predictors
+lm.fit_1<-lm(medv~., data=Boston)
+summary(lm.fit_1)
+
+#setup model with only lstat variable
+lm.fit_2<-lm(medv~lstat, data=Boston)
+summary(lm.fit_2)
+
+#setup model with only rm variable
+lm.fit_3<-lm(medv~rm, data=Boston)
+summary(lm.fit_3)
+
+#setup model with only age variable
+lm.fit_4<-lm(medv~age, data=Boston)
+summary(lm.fit_4)
