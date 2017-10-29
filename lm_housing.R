@@ -49,4 +49,46 @@ library(psych)
 pairs.panels(Boston[,1:14])
 
 #medv (median house value) is the target variable.
-#medv is correlated with predictor variables lstat and rm
+#medv is correlated with predictor variables lstat, rm and age
+
+#Plot medv vs lstat, rm and age with least squares regression lines to check the relationship
+
+plot(Boston$medv, Boston$lstat, pch=18, col=3,
+     xlab = "lower status of the population", 
+     ylab = "median house value",
+     main = "house value and wealth status")
+abline(lm.fit, col="red", lwd=3)
+
+plot(Boston$medv, Boston$rm, pch=18, col=3,
+     xlab = "avg room numbers", 
+     ylab = "median house value",
+     main = "house value and avg room numbers")
+abline(lm.fit, col="red", lwd=3)
+
+plot(Boston$medv, Boston$age, pch=18, col=3,
+     xlab = "ownership prior to 1940", 
+     ylab = "median house value",
+     main = "house value and ownership prior to 1940")
+abline(lm.fit, col="red", lwd=3)
+
+
+#******************************************
+#STEP 3 : BUILD THE MODEL
+#******************************************
+
+#Multiple linear regression with all predictors
+lm.fit_1<-lm(medv~., data=Boston)
+summary(lm.fit_1)
+
+#setup model with only lstat variable
+lm.fit_2<-lm(medv~lstat, data=Boston)
+summary(lm.fit_2)
+
+#setup model with only rm variable
+lm.fit_3<-lm(medv~rm, data=Boston)
+summary(lm.fit_3)
+
+#setup model with only age variable
+lm.fit_4<-lm(medv~age, data=Boston)
+summary(lm.fit_4)
+
