@@ -51,7 +51,7 @@ pairs.panels(Boston[,1:14])
 #medv (median house value) is the target variable.
 #medv is correlated with predictor variables lstat, rm and age
 
-<<<<<<< HEAD
+
 #Plot medv vs lstat, rm and age with least squares regression lines to check the relationship
 
 plot(Boston$medv, Boston$lstat, pch=18, col=3,
@@ -73,8 +73,6 @@ plot(Boston$medv, Boston$age, pch=18, col=3,
 abline(lm.fit, col="red", lwd=3)
 
 
-=======
->>>>>>> 5e26f233bddceb941ba97234031448444473baea
 #******************************************
 #STEP 3 : BUILD THE MODEL
 #******************************************
@@ -94,7 +92,5 @@ summary(lm.fit_3)
 #setup model with only age variable
 lm.fit_4<-lm(medv~age, data=Boston)
 summary(lm.fit_4)
-<<<<<<< HEAD
 
-=======
->>>>>>> 5e26f233bddceb941ba97234031448444473baea
+
