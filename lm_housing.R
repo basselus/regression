@@ -52,7 +52,7 @@ names(Boston)
 
 #********************************
  # Build the regression function
-#*******************************
+#********************************
 
 # The function takes the parameters x and y, returning a vector of b (beta coefficients)
 
@@ -80,6 +80,8 @@ reg(y=Boston$medv, x=Boston[1:13])
 
 library(psych)
 pairs.panels(Boston[,1:14])
+cor<-data.frame(cor(Boston[,1:14]))
+cor
 
 #medv (median house value) is the target variable.
 #medv is correlated with predictor variables lstat, rm and age
