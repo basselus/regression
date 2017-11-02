@@ -118,9 +118,9 @@ pairs.panels(Boston[,c(13,6,7,14)])
 
 
 
-#******************************************
+#*****************************************
 #STEP 3 : BUILD THE MODEL
-#******************************************
+#*****************************************
 
 #Multiple linear regression with all predictors
 lm.fit_1<-lm(medv~., data=Boston)
