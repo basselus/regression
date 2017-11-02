@@ -1,3 +1,13 @@
+#***************************************
+#PROJECT DESCRIPTION:
+#***************************************
+
+# the goal is to forecast the median house values based on 
+#its relations with the other predictor variables.The multiple regression analysis
+#will estimate the impact of the latter variables on the median house values.
+#we will first build a regression function to estimate the values of the independant variables.
+#second we will use the lm funcion from the stats package included by default in R.
+
 #******************************************
 #STEP 1 : LOAD DATASET AND EXPLORE DATASET
 #******************************************
@@ -40,6 +50,28 @@ names(Boston)
 
 #medv:median value of owner-occupied homes in \$1000s.
 
+#********************************
+ # Build the regression function
+#*******************************
+
+# The function takes the parameters x and y, returning a vector of b (beta coefficients)
+
+reg<- function (x,y){
+  
+  x<-as.matrix(x)
+  x<-cbind(Intercept=1, x)
+  b<-solve(t(x) %*% x) %*% t(x) %*% y
+  colnames(b)<- "estimate"
+  print(b)
+
+  }
+
+
+#**********************************************************
+# use the reg function to build a multiple regression model
+#**********************************************************
+
+reg(y=Boston$medv, x=Boston[1:13])
 
 #******************************************
 #STEP 2 : EXPLORATORY ANALYSIS
@@ -71,6 +103,19 @@ plot(Boston$medv, Boston$age, pch=18, col=3,
      ylab = "median house value",
      main = "house value and ownership prior to 1940")
 abline(lm.fit, col="red", lwd=3)
+
+
+#Remake the pair plot using only the variables with significant correlations vs medv
+
+#Get the column numbers of the variables 
+install.packages("fastmatch")
+fmatch("lstat", names(Boston))
+fmatch("rm", names(Boston))
+fmatch("age", names(Boston))
+
+library(psych)
+pairs.panels(Boston[,c(13,6,7,14)])
+
 
 
 #******************************************
