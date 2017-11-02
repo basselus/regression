@@ -107,7 +107,7 @@ abline(lm.fit, col="red", lwd=3)
 
 #Remake the pair plot using only the variables with significant correlations vs medv
 
-#Get the column numbers of the variables 
+#Get column numbers of the variables 
 install.packages("fastmatch")
 fmatch("lstat", names(Boston))
 fmatch("rm", names(Boston))
