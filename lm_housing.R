@@ -1,3 +1,13 @@
+#***************************************
+#PROJECT DESCRIPTION:
+#***************************************
+
+# the goal is to forecast the median house values based on 
+#its relations with the other predictor variables.The multiple regression analysis
+#will estimate the impact of the latter variables on the median house values.
+#we will first build a regression function to estimate the values of the independant variables.
+#second we will use the lm funcion from the stats package included by default in R.
+
 #******************************************
 #STEP 1 : LOAD DATASET AND EXPLORE DATASET
 #******************************************
@@ -39,6 +49,22 @@ names(Boston)
 #lstat:lower status of the population (percent).
 
 #medv:median value of owner-occupied homes in \$1000s.
+
+#********************************
+ # Build the regression function
+#*******************************
+
+# The function takes the parameters x and y, returning a vector of b (beta coefficients)
+
+reg<- function (x,y){
+  
+  x<-as.matrix(x)
+  x<-cbind(Intercept=1, x)
+  b<-solve(t(x) %*% x) %*% t(x) %*% y
+  colnames(b)<- "estimate"
+  print(b)
+
+  }
 
 
 #******************************************
