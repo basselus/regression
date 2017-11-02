@@ -66,6 +66,16 @@ reg<- function (x,y){
 
   }
 
+reg_2<- function (x,y){
+  
+  x<-as.matrix(x)
+  x<-cbind(Intercept=1, x)
+  b<-solve(t(x) %*% x) %*% t(x) %*% y
+  colnames(b)<- "estimate"
+  print(b)
+  
+}
+
 
 #**********************************************************
 # use the reg function to build a multiple regression model
