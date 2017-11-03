@@ -3,7 +3,7 @@
 #***************************************
 
 # the goal is to forecast the median house values based on 
-#its relations with the other predictor variables.The multiple regression analysis
+#their relations with the other predictor variables.The multiple regression analysis
 #will estimate the impact of the latter variables on the median house values.
 #we will first build a regression function to estimate the values of the independant variables.
 #second we will use the lm funcion from the stats package included by default in R.
@@ -79,15 +79,24 @@ reg(y=Boston$medv, x=Boston[1:13])
 #******************************************
 
 library(psych)
-pairs.panels(Boston[,1:14])
-cor<-data.frame(cor(Boston[,1:14]))
-cor
+round(corrs<-cor(Boston), 2)
+
+#Build the pair plot using only the variables with significant correlations vs medv
+
+#Get column numbers of the variables 
+install.packages("fastmatch")
+fmatch("lstat", names(Boston))
+fmatch("rm", names(Boston))
+
+library(psych)
+pairs.panels(Boston[,c(13,6,14)])
+
 
 #medv (median house value) is the target variable.
-#medv is correlated with predictor variables lstat, rm and age
+#medv is correlated with predictor variables lstat and rm 
 
 
-#Plot medv vs lstat, rm and age with least squares regression lines to check the relationship
+#Plot medv vs lstat, and rm with least squares regression lines to check the relationship
 
 plot(Boston$medv, Boston$lstat, pch=18, col=3,
      xlab = "lower status of the population", 
@@ -101,44 +110,36 @@ plot(Boston$medv, Boston$rm, pch=18, col=3,
      main = "house value and avg room numbers")
 abline(lm.fit, col="red", lwd=3)
 
-plot(Boston$medv, Boston$age, pch=18, col=3,
-     xlab = "ownership prior to 1940", 
-     ylab = "median house value",
-     main = "house value and ownership prior to 1940")
-abline(lm.fit, col="red", lwd=3)
 
 
-#Remake the pair plot using only the variables with significant correlations vs medv
-
-#Get column numbers of the variables 
-install.packages("fastmatch")
-fmatch("lstat", names(Boston))
-fmatch("rm", names(Boston))
-fmatch("age", names(Boston))
-
-library(psych)
-pairs.panels(Boston[,c(13,6,7,14)])
-
-
-
-#*****************************************
-#STEP 3 : BUILD THE MODEL
-#*****************************************
+#****************************************************
+#STEP 3 : BUILD THE MODEL AND EXPLORE THE PARAMETERS
+#****************************************************
 
 #Multiple linear regression with all predictors
 lm.fit_1<-lm(medv~., data=Boston)
 summary(lm.fit_1)
+names(lm.fit_1)
+coef(lm.fit_1)
 
 #setup model with only lstat variable
 lm.fit_2<-lm(medv~lstat, data=Boston)
 summary(lm.fit_2)
+names(lm.fit_2)
+coef(lm.fit_2)
 
 #setup model with only rm variable
 lm.fit_3<-lm(medv~rm, data=Boston)
 summary(lm.fit_3)
+names(lm.fit_3)
+coef(lm.fit_3)
 
-#setup model with only age variable
-lm.fit_4<-lm(medv~age, data=Boston)
-summary(lm.fit_4)
+#Predict median house values (medv) for given values of lstat and rm)
+
+predict(lm.fit_2, data.frame(lstat=c(15, 45)), interval = "confidence")
+predict(lm.fit_2, data.frame(lstat=c(15, 45)), interval = "prediction")
+
+predict(lm.fit_3, data.frame(rm=c(7, 10)), interval = "confidence" )
+predict(lm.fit_3, data.frame(rm=c(7, 10)), interval = "prediction" )
 
 
