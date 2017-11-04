@@ -150,7 +150,7 @@ predict(lm.fit_3, data.frame(rm=c(7, 10)), interval = "confidence" )
 predict(lm.fit_3, data.frame(rm=c(7, 10)), interval = "prediction" )
 
 #********************************************
-#EVALUATE MODEL PERFORMANCE
+# STEP 4 EVALUATE MODEL PERFORMANCE
 #********************************************
 
 #try the multiple linear regression with 2 predictors age and lstat
